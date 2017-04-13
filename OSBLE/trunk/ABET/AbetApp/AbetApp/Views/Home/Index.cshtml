@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@model List<Course>
+@using AbetApp.Models
+
+<h2>Current Courses:</h2>
+<table>
+    @foreach (Course item in Model)
+    {
+        <tr>
+            <td>
+                <b>@Html.DisplayFor(model => item.CourseNum)</b>
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Major)
+            </td>
+            <td>
+                 @Html.DisplayFor(model => item.Year)
+            </td>
+            <td>
+                 @Html.DisplayFor(model => item.Semester)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+            <td>
+                @Html.ActionLink("PreReqs", "PreReqs", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
+
+<h2>Create assessment plan:</h2>
+@using (Html.BeginForm())
+{
+    <b>Enter major:</b><br />@Html.TextBox("Major")
+    <br /><b>Enter year:</b><br />@Html.TextBox("Year")
+    <br /><b>Select semester:</b>
+    <br /><b>F:</b> @Html.RadioButton("Semester", "F"); 
+    <b>S:</b>  @Html.RadioButton("Semester", "S")
+    <br /><b>URL of course listings:</b>
+    <br />@Html.TextBox("url")
+    <br /><input type="submit" value="Build" />
+}
+<br />
+<a href="Home/CoursesRemove">Clear Courses</a>
